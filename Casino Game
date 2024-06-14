@@ -1,0 +1,46 @@
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+int main() {
+ srand(time(0)); 
+ int numberToGuess = rand() % 100 + 1; 
+ int numberOfTries = 0;
+ int guess;
+ int balance = 1000;
+ int bet;
+
+ do {
+  cout << "Welcome to the Casino Number Guessing Game" << endl;
+  cout << "Your balance: $" << balance << endl;
+  cout << "Enter your bet (1-100): ";
+  cin >> bet;
+
+  if (bet < 1 || bet > 100) {
+   cout << "Invalid bet" << endl;
+   continue;
+  }
+
+  if (bet > balance) {
+   cout << "You don't have enough money to bet that much. Please enter a smaller bet." << endl;
+   continue;
+  }
+  cout << "Guess a number between 1 and 100: ";
+  cin >> guess;
+  numberOfTries++;
+
+  if (guess < numberToGuess) {
+   cout << "Too small! Try again." << endl;
+  } else if (guess > numberToGuess) {
+   cout << "Too large! Try again." << endl;
+  } else {
+   cout << "Congratulations! You found the number in " << numberOfTries << " tries" << endl;
+   balance += bet * 2; 
+   cout << "Your balance: $" << balance << endl;
+  }
+ } while (balance > 0);
+
+ cout << "You've no money. Game over." << endl;
+ return 0;
+}
